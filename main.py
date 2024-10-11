@@ -1,8 +1,17 @@
+import time
+start_time = time.time()
+
 from llama_cpp import Llama, LlamaGrammar
 from youtube_transcript_api import YouTubeTranscriptApi
-import time
+import requests
+from dotenv import load_dotenv
+import os
 
-start_time = time.time()
+# Load environment variables from .env file
+load_dotenv()
+
+# Get the API key from environment variables
+api_key = os.getenv("YOUTUBE_API_KEY")
 
 video_id = 'qWbHSOplcvY'
 
@@ -54,7 +63,7 @@ Provide the answer strictly in valid JSON format like this:
         {"name": "ingredient2", "quantity": "amount desription"}
         // ... more ingredients
     ],
-    "Instructions": "step by step recipe instructions here"
+    "Instructions": "Step by step recipe instructions."
 }
 """
 
