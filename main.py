@@ -2,8 +2,6 @@ import time
 start_time = time.time()
 import os
 from dotenv import load_dotenv
-import requests
-from youtube_transcript_api import YouTubeTranscriptApi
 from llama_cpp import Llama, LlamaGrammar
 from youtube_metadata import YouTubeMetadataFetcher  # Assuming this class is in youtube_metadata_fetcher.py
 

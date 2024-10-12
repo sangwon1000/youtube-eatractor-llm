@@ -42,3 +42,43 @@ class YouTubeMetadataFetcher:
         except Exception as e:
             print(f"Error fetching transcript: {e}")
             return None
+        
+    def get_playlists(self, channel_id, max_results=50):
+        """Fetch the list of playlists for a given YouTube channel."""
+        url = f"https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId={channel_id}&maxResults={max_results}&key={self.api_key}"
+        
+        response = requests.get(url)
+        if response.status_code == 200:
+            data = response.json()
+            playlists = []
+            for item in data.get('items', []):
+                playlist_info = {
+                    "title": item['snippet']['title'],
+                    "description": item['snippet']['description'],
+                    "playlist_id": item['id']
+                }
+                playlists.append(playlist_info)
+            return playlists
+        else:
+            print(f"Error fetching playlists: {response.status_code}, {response.text}")
+            return None
+        
+# given playlist id, get all videos in the playlist
+    def get_playlist_videos(self, playlist_id, max_results=50):
+        """Fetch the list of videos in a given YouTube playlist."""
+        url = f"https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId={playlist_id}&maxResults={max_results}&key={self.api_key}"
+        
+        response = requests.get(url)
+        if response.status_code == 200:
+            data = response.json()
+            videos = []
+            for item in data.get('items', []):
+                video_info = {
+                    "title": item['snippet']['title'],
+                    "video_id": item['snippet']['resourceId']['videoId']
+                }
+                videos.append(video_info)
+            return videos
+        else:
+            print(f"Error fetching videos: {response.status_code}, {response.text}")
+            return None
