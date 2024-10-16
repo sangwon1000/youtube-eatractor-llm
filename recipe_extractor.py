@@ -5,7 +5,7 @@ from llama_cpp import Llama, LlamaGrammar
 from youtube_metadata import YouTubeMetadataFetcher  # Assuming this class is in youtube_metadata_fetcher.py
 
 class RecipeExtractor:
-    def __init__(self, video_id: str, grammar_file_path: str = './grammar.gbnf'):
+    def __init__(self, video_id: str, grammar_file_path: str = './recipe.gbnf'):
         # Load environment variables from .env file
         load_dotenv()
 
